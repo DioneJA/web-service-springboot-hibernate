@@ -3,19 +3,28 @@ package com.ifsuldemias.course.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class User implements Serializable { /* Implementar o serializable por padrão */
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity/*Declarando a entidade da tabela*/
+public class Users implements Serializable { /* Implementar o serializable por padrão */
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)/*Auto increment no id*/
 	private Long id;
-	private String name;
+	private String name; 
 	private String email;
 	private String phone;
 	private String password;
 
-	public User() {
+	public Users() {
 
 	}
 
-	public User(Long id, String name, String email, String phone, String password) {
+	public Users(Long id, String name, String email, String phone, String password) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
@@ -76,7 +85,7 @@ public class User implements Serializable { /* Implementar o serializable por pa
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Users other = (Users) obj;
 		return Objects.equals(id, other.id);
 	}
 
