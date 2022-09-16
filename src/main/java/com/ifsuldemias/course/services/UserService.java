@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ifsuldemias.course.entities.Users;
 import com.ifsuldemias.course.repositories.UserRepository;
 @Service
-public class UserServices{
+public class UserService{
 	@Autowired
 	private UserRepository repository;
 	

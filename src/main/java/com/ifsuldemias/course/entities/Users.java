@@ -12,11 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity /* Declarando a entidade da tabela */
 @Table(name="tb_user")
 public class Users implements Serializable { /* Implementar o serializable por padrão */
 	private static final long serialVersionUID = 1L;
-
+	@JsonIgnore //Evitar o looping na requisição
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) /* Auto increment no id */
 	private Long id;

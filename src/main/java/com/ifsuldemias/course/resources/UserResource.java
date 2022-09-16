@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ifsuldemias.course.entities.Users;
-import com.ifsuldemias.course.services.UserServices;
+import com.ifsuldemias.course.services.UserService;
 
 @RestController
 @RequestMapping(value="/users")
 public class UserResource {
 	/*AutoWired injeta automaticamente e importa as dependencia do services*/
 	@Autowired
-	private UserServices services;
+	private UserService services;
 
 	@GetMapping
 	public ResponseEntity<List<Users>> findall(){
