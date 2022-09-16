@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ifsuldemias.course.entities.enums.OrderStatus;
 @Entity
 @Table(name="tb_order")//Renomeando a tabela
 public class Order implements Serializable{
@@ -23,6 +24,7 @@ public class Order implements Serializable{
 	//Formatando a data no formato ISO 
 	@JsonFormat(shape  = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant instant;// Registra o momento
+	private Integer orderStatus;
 	@ManyToOne
 	@JoinColumn(name="cliend_id")
 	private Users client;
@@ -31,11 +33,12 @@ public class Order implements Serializable{
 
 	}
 
-	public Order(Long id, Instant instant, Users client) {
+	public Order(Long id, Instant instant, Users client,OrderStatus orderStatus) {
 		super();
 		this.id = id;
 		this.instant = instant;
 		this.client = client;
+		setOrderStatus(orderStatus);
 	}
 
 	public Long getId() {
@@ -58,8 +61,19 @@ public class Order implements Serializable{
 		return client;
 	}
 
-	public void SetClient(Users client) {
+	public void setClient(Users client) {
 		this.client = client;
+	}
+
+	public OrderStatus getOrderStatus() {
+		return OrderStatus.valueOf(orderStatus);
+	}
+
+	public void setOrderStatus(OrderStatus orderStatus) {
+		if(orderStatus!=null) {
+			this.orderStatus = orderStatus.getCode();
+		}
+
 	}
 
 	@Override
