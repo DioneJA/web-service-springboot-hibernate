@@ -1,24 +1,32 @@
 package com.ifsuldemias.course.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-@Entity/*Declarando a entidade da tabela*/
+@Entity /* Declarando a entidade da tabela */
+@Table(name="tb_user")
 public class Users implements Serializable { /* Implementar o serializable por padrão */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)/*Auto increment no id*/
+	@GeneratedValue(strategy = GenerationType.IDENTITY) /* Auto increment no id */
 	private Long id;
-	private String name; 
+	private String name;
 	private String email;
 	private String phone;
 	private String password;
+	
+	@OneToMany(mappedBy = "client")
+	private List<Order> orders = new ArrayList<>();// Possui somente get para não alterar a lista
 
 	public Users() {
 
@@ -70,6 +78,10 @@ public class Users implements Serializable { /* Implementar o serializable por p
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
 	}
 
 	@Override
