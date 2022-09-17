@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
+import com.ifsuldemias.course.entities.Category;
 import com.ifsuldemias.course.entities.Order;
 import com.ifsuldemias.course.entities.Users;
 import com.ifsuldemias.course.entities.enums.OrderStatus;
+import com.ifsuldemias.course.repositories.CategoryRepository;
 import com.ifsuldemias.course.repositories.OrderRepository;
 import com.ifsuldemias.course.repositories.UserRepository;
 
@@ -21,7 +23,8 @@ public class TestConfig implements CommandLineRunner{
 	private UserRepository userRepository;
 	@Autowired
 	private OrderRepository orderRepository;
-	
+	@Autowired
+	private CategoryRepository categoryRepository;
 	//Semeando o banco de dados
 	@Override
 	public void run(String... args) throws Exception {
@@ -43,5 +46,12 @@ public class TestConfig implements CommandLineRunner{
 		
 		orderRepository.saveAll(orders);
 		
+		List<Category> category = new ArrayList<>();
+		Category c1 = new Category(null, "Computers");
+		Category c2 = new Category(null, "Smartphones");
+		category.add(c1);
+		category.add(c2);
+		
+		categoryRepository.saveAll(category);
 	}
 }
