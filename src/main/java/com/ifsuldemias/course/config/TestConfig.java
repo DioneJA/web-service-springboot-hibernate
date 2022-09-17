@@ -2,6 +2,7 @@ package com.ifsuldemias.course.config;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,16 @@ public class TestConfig implements CommandLineRunner {
 		product.add(p5);
 
 		productRepository.saveAll(product);
+		
+		/*Associando os produtos com suas categorias*/
+		p1.getCategories().add(c2);
+		p2.getCategories().add(c1);
+		p2.getCategories().add(c3);
+		p3.getCategories().add(c3);
+		p4.getCategories().add(c3);
+		p5.getCategories().add(c2);
+		
+		productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
 		/*------------------------------- Users ------------------------------*/
 		List<Users> users = new ArrayList<>();
 		Users u1 = new Users(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");

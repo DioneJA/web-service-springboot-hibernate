@@ -13,7 +13,7 @@ import com.ifsuldemias.course.entities.Category;
 import com.ifsuldemias.course.services.CategoryService;
 
 @RestController
-@RequestMapping(value="/category")
+@RequestMapping(value="/categories")
 public class CategoryResource {
 	@Autowired
 	private CategoryService service;
