@@ -29,7 +29,7 @@ public class OrderItem implements Serializable {
 		this.id.setOrder(order);
 		this.id.setProduct(product);
 	}
-	@JsonIgnore
+	@JsonIgnore//Evitar Looping de JSON
 	public Order getOrder() {
 		return this.id.getOrder();
 	}
