@@ -1,4 +1,4 @@
-package com.ifsuldemias.course.entities;
+ package com.ifsuldemias.course.entities;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -7,21 +7,20 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ifsuldemias.course.entities.pk.OrderItemPk;
 
 @Entity
 @Table(name = "tb_order_item")
 public class OrderItem implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
 	@EmbeddedId
-	private OrderItemPk id;
+	private OrderItemPk id = new OrderItemPk();
 
 	private Integer quantity;
 	private Double price;
 
 	public OrderItem() {
-
 	}
 
 	public OrderItem(Order order, Product product, Integer quantity, Double price) {
@@ -30,7 +29,7 @@ public class OrderItem implements Serializable {
 		this.id.setOrder(order);
 		this.id.setProduct(product);
 	}
-
+	@JsonIgnore
 	public Order getOrder() {
 		return this.id.getOrder();
 	}
@@ -39,7 +38,7 @@ public class OrderItem implements Serializable {
 		this.id.setOrder(order);
 	}
 
-	public Product getProdutct() {
+	public Product getProduct() {
 		return this.id.getProduct();
 	}
 

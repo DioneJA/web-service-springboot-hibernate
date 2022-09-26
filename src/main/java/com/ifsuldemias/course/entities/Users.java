@@ -18,7 +18,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name="tb_user")
 public class Users implements Serializable { /* Implementar o serializable por padrão */
 	private static final long serialVersionUID = 1L;
-	@JsonIgnore //Evitar o looping na requisição
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) /* Auto increment no id */
 	private Long id;
@@ -26,7 +25,7 @@ public class Users implements Serializable { /* Implementar o serializable por p
 	private String email;
 	private String phone;
 	private String password;
-	
+	@JsonIgnore //Evitar o looping na requisição
 	@OneToMany(mappedBy = "client")
 	private List<Order> orders = new ArrayList<>();// Possui somente get para não alterar a lista
 

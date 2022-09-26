@@ -11,10 +11,12 @@ import org.springframework.context.annotation.Configuration;
 
 import com.ifsuldemias.course.entities.Category;
 import com.ifsuldemias.course.entities.Order;
+import com.ifsuldemias.course.entities.OrderItem;
 import com.ifsuldemias.course.entities.Product;
 import com.ifsuldemias.course.entities.Users;
 import com.ifsuldemias.course.entities.enums.OrderStatus;
 import com.ifsuldemias.course.repositories.CategoryRepository;
+import com.ifsuldemias.course.repositories.OrderItemRepository;
 import com.ifsuldemias.course.repositories.OrderRepository;
 import com.ifsuldemias.course.repositories.ProductRepository;
 import com.ifsuldemias.course.repositories.UserRepository;
@@ -30,7 +32,8 @@ public class TestConfig implements CommandLineRunner {
 	private CategoryRepository categoryRepository;
 	@Autowired
 	private ProductRepository productRepository;
-
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 	// Semeando o banco de dados
 	@Override
 	public void run(String... args) throws Exception {
@@ -69,6 +72,7 @@ public class TestConfig implements CommandLineRunner {
 		p4.getCategories().add(c3);
 		p5.getCategories().add(c2);
 		
+		
 		productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
 		/*------------------------------- Users ------------------------------*/
 		List<Users> users = new ArrayList<>();
@@ -86,7 +90,20 @@ public class TestConfig implements CommandLineRunner {
 		orders.add(o1);
 		orders.add(o2);
 		orders.add(o3);
-
+		
 		orderRepository.saveAll(orders);
+		/*------------------------------- Orders Item------------------------------*/
+		List<OrderItem> orderItem = new ArrayList<OrderItem>();
+		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+		orderItem.add(oi1);
+		orderItem.add(oi2);
+		orderItem.add(oi3);
+		orderItem.add(oi4);
+		
+		orderItemRepository.saveAll(orderItem);
 	}
 }
